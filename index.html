@@ -18,16 +18,16 @@
         body {
             font-family: 'Segoe UI', sans-serif;
             background-color: var(--bg);
-            padding: 10px; /* Reduzido */
+            padding: 10px;
             display: flex;
             justify-content: center;
         }
 
         .container {
             width: 100%;
-            max-width: 1100px; /* Reduzido de 1200px */
+            max-width: 1100px;
             background: var(--white);
-            padding: 15px; /* Reduzido de 25px */
+            padding: 15px;
             border-radius: 8px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
@@ -39,13 +39,13 @@
             padding-bottom: 8px;
             text-transform: uppercase;
             margin-bottom: 15px;
-            font-size: 1.2rem; /* Menor */
+            font-size: 1.2rem;
         }
 
         .dashboard {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 8px; /* Reduzido */
+            gap: 8px;
             margin-bottom: 15px;
             background: #f8f9fa;
             padding: 10px;
@@ -55,7 +55,7 @@
 
         .stat-card {
             background: white;
-            padding: 6px; /* Reduzido */
+            padding: 6px;
             border-radius: 6px;
             text-align: center;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
@@ -64,7 +64,7 @@
 
         .stat-card span {
             display: block;
-            font-size: 0.7rem; /* Menor */
+            font-size: 0.7rem;
             color: #666;
             text-transform: uppercase;
             font-weight: bold;
@@ -72,19 +72,19 @@
         }
 
         .stat-card strong {
-            font-size: 1.1rem; /* Menor */
+            font-size: 1.1rem;
             color: var(--red);
         }
 
         .extra-keys input {
-            padding: 4px; /* Reduzido */
+            padding: 4px;
             width: 60%;
             margin: 3px auto;
             border: 2px solid #333;
             border-radius: 4px;
             text-align: center;
             font-weight: 900;
-            font-size: 1rem; /* Menor */
+            font-size: 1rem;
             color: #000;
         }
 
@@ -102,7 +102,7 @@
         }
 
         .search-input, .filter-select {
-            padding: 6px 10px; /* Reduzido */
+            padding: 6px 10px;
             border: 2px solid #999;
             border-radius: 6px;
             outline: none;
@@ -123,13 +123,13 @@
         th {
             background-color: var(--primary);
             color: white;
-            padding: 6px; /* Reduzido */
+            padding: 6px;
             text-transform: uppercase;
-            font-size: 0.75rem; /* Menor */
+            font-size: 0.75rem;
         }
 
         td {
-            padding: 4px 3px; /* Reduzido significativamente */
+            padding: 4px 3px;
             background: #fff;
             border-bottom: 1px solid #eee;
             text-align: center;
@@ -137,13 +137,13 @@
 
         select {
             width: 100%;
-            padding: 4px 2px; /* Reduzido */
+            padding: 4px 2px;
             font-weight: 900; 
             border-radius: 4px;
             border: 1px solid #666;
             text-align: center;
             cursor: pointer;
-            font-size: 0.8rem; /* Menor */
+            font-size: 0.8rem;
         }
 
         .status-sim { background-color: var(--green) !important; color: white !important; }
@@ -163,19 +163,19 @@
             padding: 4px;
             text-align: center;
             font-weight: 900;
-            font-size: 0.95rem; /* Menor */
+            font-size: 0.95rem;
             color: #000;
             border: 1px solid #999;
         }
 
         .btn {
-            padding: 6px 12px; /* Reduzido */
+            padding: 6px 12px;
             border-radius: 5px;
             border: none;
             cursor: pointer;
             font-weight: bold;
             text-transform: uppercase;
-            font-size: 0.75rem; /* Menor */
+            font-size: 0.75rem;
         }
 
         .btn-adm { background: #8e44ad; color: white; }
@@ -220,11 +220,11 @@
         
         <div class="stat-card extra-keys">
             <span>chaves (1ª Via) sem identificação</span>
-            <input type="number" id="extra-1via" class="bloqueado" value="0">
+            <input type="number" id="extra-1via" disabled value="0">
         </div>
         <div class="stat-card extra-keys">
             <span>chaves (2ª Via) sem identificação</span>
-            <input type="number" id="extra-2via" class="bloqueado" value="0">
+            <input type="number" id="extra-2via" disabled value="0">
         </div>
     </div>
     
@@ -280,6 +280,7 @@
         document.getElementById('btnRegistrar').classList.toggle('bloqueado', !ativo);
         document.getElementById('thAcoes').style.display = ativo ? "table-cell" : "none";
 
+        // Libera inputs da tabela e os campos extras de sem identificação
         document.querySelectorAll('#corpo-tabela input, #corpo-tabela select, #extra-1via, #extra-2via').forEach(el => {
             el.disabled = !ativo;
             if(ativo) el.classList.add('editavel');
@@ -289,19 +290,21 @@
     }
 
     function salvarTudo() {
+        // Salva as chaves da tabela
         const dados = Array.from(document.querySelectorAll('#corpo-tabela tr')).map(tr => {
             const i = tr.querySelectorAll('input, select');
             return { numero: i[0].value, via1: i[1].value, via2: i[2].value, local: i[3].value };
         });
         localStorage.setItem('dadosChavesADM', JSON.stringify(dados));
 
+        // Salva os contadores de chaves sem identificação
         const extras = { 
             via1: document.getElementById('extra-1via').value, 
             via2: document.getElementById('extra-2via').value 
         };
         localStorage.setItem('dadosExtrasADM', JSON.stringify(extras));
 
-        alert("✅ Salvo!");
+        alert("✅ Salvo com sucesso!");
         modoAdmAtivo = false;
         location.reload();
     }
@@ -382,9 +385,12 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-        const extras = JSON.parse(localStorage.getItem('dadosExtrasADM') || '{}');
-        document.getElementById('extra-1via').value = extras.via1 || 0;
-        document.getElementById('extra-2via').value = extras.via2 || 0;
+        // Carrega as chaves sem identificação
+        const extras = JSON.parse(localStorage.getItem('dadosExtrasADM') || '{"via1":0, "via2":0}');
+        document.getElementById('extra-1via').value = extras.via1;
+        document.getElementById('extra-2via').value = extras.via2;
+
+        // Carrega as chaves da tabela
         const dados = JSON.parse(localStorage.getItem('dadosChavesADM') || '[]');
         dados.sort((a, b) => a.numero - b.numero);
         dados.forEach(item => adicionarLinha(item));
