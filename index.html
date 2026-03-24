@@ -12,266 +12,155 @@
             --white: #ffffff;
             --green: #27ae60; 
             --red: #c0392b;   
+            --orange: #e67e22;
             --local-bg: #dbeafe; 
         }
 
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background-color: var(--bg);
-            padding: 10px;
-            display: flex;
-            justify-content: center;
-        }
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg); padding: 10px; display: flex; justify-content: center; }
+        .container { width: 100%; max-width: 1100px; background: var(--white); padding: 15px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .page { display: none; }
+        .active { display: block; }
 
-        .container {
-            width: 100%;
-            max-width: 1100px;
-            background: var(--white);
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
+        h2 { text-align: center; color: var(--primary); border-bottom: 2px solid var(--accent); padding-bottom: 8px; text-transform: uppercase; margin-bottom: 15px; font-size: 1.2rem; }
+        h2.saida-titulo { border-color: var(--orange); color: var(--orange); }
 
-        h2 {
-            text-align: center;
-            color: var(--primary);
-            border-bottom: 2px solid var(--accent);
-            padding-bottom: 8px;
-            text-transform: uppercase;
-            margin-bottom: 15px;
-            font-size: 1.2rem;
-        }
+        .dashboard { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 8px; margin-bottom: 15px; background: #f8f9fa; padding: 10px; border-radius: 8px; border: 1px solid #ddd; }
+        .stat-card { background: white; padding: 6px; border-radius: 6px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05); cursor: pointer; }
+        .stat-card span { display: block; font-size: 0.7rem; color: #666; text-transform: uppercase; font-weight: bold; line-height: 1.1; }
+        .stat-card strong { font-size: 1.1rem; color: var(--red); }
 
-        .dashboard {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 8px;
-            margin-bottom: 15px;
-            background: #f8f9fa;
-            padding: 10px;
-            border-radius: 8px;
-            border: 1px solid #ddd;
-        }
+        .extra-keys input { padding: 4px; width: 60%; margin: 3px auto; border: 2px solid #333; border-radius: 4px; text-align: center; font-weight: 900; font-size: 1rem; color: #000; }
 
-        .stat-card {
-            background: white;
-            padding: 6px;
-            border-radius: 6px;
-            text-align: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            cursor: pointer;
-        }
-
-        .stat-card span {
-            display: block;
-            font-size: 0.7rem;
-            color: #666;
-            text-transform: uppercase;
-            font-weight: bold;
-            line-height: 1.1;
-        }
-
-        .stat-card strong {
-            font-size: 1.1rem;
-            color: var(--red);
-        }
-
-        .extra-keys input {
-            padding: 4px;
-            width: 60%;
-            margin: 3px auto;
-            border: 2px solid #333;
-            border-radius: 4px;
-            text-align: center;
-            font-weight: 900;
-            font-size: 1rem;
-            color: #000;
-        }
-
-        .admin-controls {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 12px;
-            gap: 8px;
-        }
-
-        .search-container {
-            margin-bottom: 12px;
-            display: flex;
-            gap: 8px;
-        }
-
-        .search-input, .filter-select {
-            padding: 6px 10px;
-            border: 2px solid #999;
-            border-radius: 6px;
-            outline: none;
-            font-weight: bold;
-            color: #000;
-            font-size: 0.85rem;
-        }
-
+        .admin-controls { display: flex; justify-content: space-between; margin-bottom: 12px; gap: 8px; }
+        .search-container { margin-bottom: 12px; display: flex; gap: 8px; }
+        .search-input, .filter-select { padding: 6px 10px; border: 2px solid #999; border-radius: 6px; outline: none; font-weight: bold; color: #000; font-size: 0.85rem; }
         .search-input { flex: 1.2; }
         .filter-select { flex: 2; background: var(--local-bg); }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 5px;
-        }
-
-        th {
-            background-color: var(--primary);
-            color: white;
-            padding: 6px;
-            text-transform: uppercase;
-            font-size: 0.75rem;
-        }
-
-        td {
-            padding: 4px 3px;
-            background: #fff;
-            border-bottom: 1px solid #eee;
-            text-align: center;
-        }
-
-        select {
-            width: 100%;
-            padding: 4px 2px;
-            font-weight: 900; 
-            border-radius: 4px;
-            border: 1px solid #666;
-            text-align: center;
-            cursor: pointer;
-            font-size: 0.8rem;
-        }
+        table { width: 100%; border-collapse: collapse; margin-top: 5px; }
+        th { background-color: var(--primary); color: white; padding: 6px; text-transform: uppercase; font-size: 0.75rem; }
+        td { padding: 4px 3px; background: #fff; border-bottom: 1px solid #eee; text-align: center; }
 
         .status-sim { background-color: var(--green) !important; color: white !important; }
         .status-nao { background-color: var(--red) !important; color: white !important; }
+        .select-local { background-color: #fffde7; color: #000; border: 1px solid #fbc02d; font-weight: bold; text-align: left; padding-left: 4px; }
 
-        .select-local {
-            background-color: #fffde7;
-            color: #000;
-            border: 1px solid #fbc02d;
-            font-weight: bold;
-            text-align: left;
-            padding-left: 4px;
-        }
-
-        .input-numero {
-            width: 80%;
-            padding: 4px;
-            text-align: center;
-            font-weight: 900;
-            font-size: 0.95rem;
-            color: #000;
-            border: 1px solid #999;
-        }
-
-        .btn {
-            padding: 6px 12px;
-            border-radius: 5px;
-            border: none;
-            cursor: pointer;
-            font-weight: bold;
-            text-transform: uppercase;
-            font-size: 0.75rem;
-        }
-
+        .btn { padding: 6px 12px; border-radius: 5px; border: none; cursor: pointer; font-weight: bold; text-transform: uppercase; font-size: 0.75rem; }
         .btn-adm { background: #8e44ad; color: white; }
+        .btn-saida-nav { background: var(--orange); color: white; }
         .btn-save { background: var(--green); color: white; display: none; }
-        
-        .btn-add { 
-            background: var(--primary); 
-            color: white; 
-            width: 100%; 
-            margin-bottom: 12px; 
-            font-size: 0.85rem;
-            display: block;
-        }
-
-        .btn-remove { background: #000; color: white; padding: 3px 6px; }
+        .btn-voltar { background: #7f8c8d; color: white; }
+        .btn-add { background: var(--primary); color: white; width: 100%; margin-bottom: 12px; font-size: 0.85rem; display: block; }
         
         .bloqueado { opacity: 0.4; pointer-events: none; cursor: not-allowed; }
         .editavel { border: 2px solid #000 !important; background: white !important; }
         
-        #btnFecharBusca { background: var(--red); color: white; display: none; }
+        /* Estilos específicos da tabela de saída */
+        .tab-saida input, .tab-saida select { width: 92%; padding: 4px; border: 1px solid #ccc; border-radius: 4px; font-size: 0.8rem; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h2>Chaves armários Novo-ADM</h2>
-
-    <div class="admin-controls">
-        <button id="btnModoAdm" class="btn btn-adm" onclick="toggleModoAdm()">🔓 Modo ADM</button>
-        <button id="btnSalvarGeral" class="btn btn-save" onclick="salvarTudo()">💾 Salvar Tudo</button>
-    </div>
-
-    <div id="areaDashboard" class="dashboard">
-        <div class="stat-card" onclick="aplicarFiltroExclusivo('status', 1)">
-            <span>Armário sem chave 1ª Via</span>
-            <strong id="count-sem-1via">0</strong>
+    <div id="telaPrincipal" class="page active">
+        <h2>Chaves armários Novo-ADM</h2>
+        <div class="admin-controls">
+            <button id="btnModoAdm" class="btn btn-adm" onclick="toggleModoAdm()">🔓 Modo ADM</button>
+            <button class="btn btn-saida-nav" onclick="irPara('telaSaida')">📑 Controle de Saída</button>
+            <button id="btnSalvarGeral" class="btn btn-save" onclick="salvarTudo()">💾 Salvar Tudo</button>
         </div>
-        <div class="stat-card" onclick="aplicarFiltroExclusivo('status', 2)">
-            <span>Armário sem chave 2ª Via</span>
-            <strong id="count-sem-2via">0</strong>
+
+        <div class="dashboard">
+            <div class="stat-card" onclick="aplicarFiltroExclusivo('status', 1)">
+                <span>Armário sem chave 1ª Via</span><strong id="count-sem-1via">0</strong>
+            </div>
+            <div class="stat-card" onclick="aplicarFiltroExclusivo('status', 2)">
+                <span>Armário sem chave 2ª Via</span><strong id="count-sem-2via">0</strong>
+            </div>
+            <div class="stat-card extra-keys">
+                <span>chaves (1ª Via) sem identificação</span>
+                <input type="number" id="extra-1via" disabled value="0">
+            </div>
+            <div class="stat-card extra-keys">
+                <span>chaves (2ª Via) sem identificação</span>
+                <input type="number" id="extra-2via" disabled value="0">
+            </div>
         </div>
         
-        <div class="stat-card extra-keys">
-            <span>chaves (1ª Via) sem identificação</span>
-            <input type="number" id="extra-1via" disabled value="0">
+        <div class="search-container">
+            <input type="text" id="inputBusca" class="search-input" placeholder="🔍 Nº Chave..." oninput="aplicarFiltroExclusivo('texto')">
+            <select id="filtroLocal" class="filter-select" onchange="aplicarFiltroExclusivo('local')">
+                <option value="todos">📍 TODOS OS SETORES</option>
+                <option value="0">SETOR 0 - NÃO DEFINIDO</option>
+                <option value="1">SETOR 1 - PRÓXIMO AO DESCANSO</option>
+                <option value="2">SETOR 2 - TÉRREO ESQUERDA</option>
+                <option value="3">SETOR 3 - ESCADARIA ESQUERDA</option>
+                <option value="4">SETOR 4 - ESCADARIA DIREITA</option>
+                <option value="5">SETOR 5 - 1º ANDAR (WC)</option>
+            </select>
+            <button id="btnFecharBusca" class="btn" style="background:var(--red); color:white; display:none" onclick="resetarTudo()">X</button>
         </div>
-        <div class="stat-card extra-keys">
-            <span>chaves (2ª Via) sem identificação</span>
-            <input type="number" id="extra-2via" disabled value="0">
-        </div>
-    </div>
-    
-    <div class="search-container">
-        <input type="text" id="inputBusca" class="search-input" placeholder="🔍 Nº Chave..." oninput="aplicarFiltroExclusivo('texto')">
-        <select id="filtroLocal" class="filter-select" onchange="aplicarFiltroExclusivo('local')">
-            <option value="todos">📍 TODOS OS SETORES</option>
-            <option value="0">SETOR 0 - NÃO DEFINIDO</option>
-            <option value="1">SETOR 1 - PRÓXIMO AO DESCANSO</option>
-            <option value="2">SETOR 2 - TÉRREO ESQUERDA</option>
-            <option value="3">SETOR 3 - ESCADARIA ESQUERDA</option>
-            <option value="4">SETOR 4 - ESCADARIA DIREITA</option>
-            <option value="5">SETOR 5 - 1º ANDAR (WC)</option>
-        </select>
-        <button id="btnFecharBusca" class="btn" onclick="resetarTudo()">X</button>
+
+        <button id="btnRegistrar" class="btn btn-add bloqueado" onclick="adicionarLinha({}, true)">+ Registrar Nova Chave</button>
+
+        <table id="tabela-chaves">
+            <thead>
+                <tr>
+                    <th style="width: 10%;">chave N°</th>
+                    <th style="width: 15%;">1ª Via chave</th>
+                    <th style="width: 15%;">2ª Via chave</th>
+                    <th style="width: 50%;">Setor / Localização</th>
+                    <th id="thAcoes" style="width: 10%; display: none;">Ações</th>
+                </tr>
+            </thead>
+            <tbody id="corpo-tabela"></tbody>
+        </table>
     </div>
 
-    <button id="btnRegistrar" class="btn btn-add bloqueado" onclick="adicionarLinha({}, true)">+ Registrar Nova Chave</button>
+    <div id="telaSaida" class="page">
+        <h2 class="saida-titulo">Controle de Saída - 2ª Via</h2>
+        <div class="admin-controls">
+            <button class="btn btn-voltar" onclick="irPara('telaPrincipal')">⬅ Voltar</button>
+            <button id="btnEditSaida" class="btn btn-adm" onclick="validarSenha(liberarEdicaoSaida)">🔓 Editar Tabela</button>
+            <button id="btnSalvarSaida" class="btn btn-save" onclick="salvarSaidas()">💾 Salvar Saídas</button>
+        </div>
 
-    <table id="tabela-chaves">
-        <thead>
-            <tr>
-                <th style="width: 10%;">chave N°</th>
-                <th style="width: 15%;">1ª Via chave</th>
-                <th style="width: 15%;">2ª Via chave</th>
-                <th style="width: 50%;">Setor / Localização</th>
-                <th id="thAcoes" style="width: 10%; display: none;">Ações</th>
-            </tr>
-        </thead>
-        <tbody id="corpo-tabela"></tbody>
-    </table>
+        <button class="btn btn-add" style="background: var(--orange);" onclick="validarSenha(() => adicionarLinhaSaida({}, true, true))">+ Registrar Nova Saída</button>
+
+        <table class="tab-saida">
+            <thead>
+                <tr>
+                    <th>Data/Hora</th><th>Chave</th><th>Solicitante</th><th>Setor</th><th>Ramal</th><th>Motivo</th><th>Visto</th><th class="thAcoesSaida" style="display:none">Ação</th>
+                </tr>
+            </thead>
+            <tbody id="corpo-saidas"></tbody>
+        </table>
+    </div>
 </div>
 
 <script>
     const SENHA_MESTRA = 'APPADM';
     let modoAdmAtivo = false;
+    let modoEdicaoSaida = false;
 
+    function irPara(id) {
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+    }
+
+    function validarSenha(callback) {
+        if (prompt("Digite a senha de administrador:") === SENHA_MESTRA) { callback(); }
+        else { alert("Senha incorreta!"); }
+    }
+
+    // --- LÓGICA TELA PRINCIPAL (ORIGINAL) ---
     function toggleModoAdm() {
         if (!modoAdmAtivo) {
             if (prompt("Digite a senha de administrador:") === SENHA_MESTRA) {
                 modoAdmAtivo = true;
                 liberarInterface(true);
             }
-        } else {
-            modoAdmAtivo = false;
-            location.reload(); 
-        }
+        } else { location.reload(); }
     }
 
     function liberarInterface(ativo) {
@@ -279,89 +168,121 @@
         document.getElementById('btnSalvarGeral').style.display = ativo ? "block" : "none";
         document.getElementById('btnRegistrar').classList.toggle('bloqueado', !ativo);
         document.getElementById('thAcoes').style.display = ativo ? "table-cell" : "none";
-
-        // Libera inputs da tabela e os campos extras de sem identificação
         document.querySelectorAll('#corpo-tabela input, #corpo-tabela select, #extra-1via, #extra-2via').forEach(el => {
             el.disabled = !ativo;
             if(ativo) el.classList.add('editavel');
         });
-
-        document.querySelectorAll('.td-remove').forEach(td => td.style.display = ativo ? "table-cell" : "none");
-    }
-
-    function salvarTudo() {
-        // Salva as chaves da tabela
-        const dados = Array.from(document.querySelectorAll('#corpo-tabela tr')).map(tr => {
-            const i = tr.querySelectorAll('input, select');
-            return { numero: i[0].value, via1: i[1].value, via2: i[2].value, local: i[3].value };
-        });
-        localStorage.setItem('dadosChavesADM', JSON.stringify(dados));
-
-        // Salva os contadores de chaves sem identificação
-        const extras = { 
-            via1: document.getElementById('extra-1via').value, 
-            via2: document.getElementById('extra-2via').value 
-        };
-        localStorage.setItem('dadosExtrasADM', JSON.stringify(extras));
-
-        alert("✅ Salvo com sucesso!");
-        modoAdmAtivo = false;
-        location.reload();
     }
 
     function adicionarLinha(item = { numero: '', via1: 'sim', via2: 'nao', local: '0' }, nova = false) {
         const tr = document.createElement('tr');
         tr.innerHTML = `
-            <td><input type="number" class="input-numero" value="${item.numero}" disabled></td>
+            <td><input type="number" style="width:80%" class="input-numero" value="${item.numero}" disabled></td>
             <td><select disabled onchange="atualizarCores(this)"><option value="sim" ${item.via1==='sim'?'selected':''}>SIM</option><option value="nao" ${item.via1==='nao'?'selected':''}>NÃO</option></select></td>
             <td><select disabled onchange="atualizarCores(this)"><option value="sim" ${item.via2==='sim'?'selected':''}>SIM</option><option value="nao" ${item.via2==='nao'?'selected':''}>NÃO</option></select></td>
-            <td>
-                <select disabled class="select-local">
-                    <option value="0" ${item.local==='0'?'selected':''}>SETOR 0 - NÃO DEFINIDO</option>
-                    <option value="1" ${item.local==='1'?'selected':''}>SETOR 1 - PRÓXIMO DESCANSO</option>
-                    <option value="2" ${item.local==='2'?'selected':''}>SETOR 2 - TÉRREO ESQUERDA</option>
-                    <option value="3" ${item.local==='3'?'selected':''}>SETOR 3 - ESCADARIA ESQUERDA</option>
-                    <option value="4" ${item.local==='4'?'selected':''}>SETOR 4 - ESCADARIA DIREITA</option>
-                    <option value="5" ${item.local==='5'?'selected':''}>SETOR 5 - 1º ANDAR (WC)</option>
-                </select>
-            </td>
+            <td><select disabled class="select-local">
+                <option value="0" ${item.local==='0'?'selected':''}>SETOR 0 - NÃO DEFINIDO</option>
+                <option value="1" ${item.local==='1'?'selected':''}>SETOR 1 - PRÓXIMO DESCANSO</option>
+                <option value="2" ${item.local==='2'?'selected':''}>SETOR 2 - TÉRREO ESQUERDA</option>
+                <option value="3" ${item.local==='3'?'selected':''}>SETOR 3 - ESCADARIA ESQUERDA</option>
+                <option value="4" ${item.local==='4'?'selected':''}>SETOR 4 - ESCADARIA DIREITA</option>
+                <option value="5" ${item.local==='5'?'selected':''}>SETOR 5 - 1º ANDAR (WC)</option>
+            </select></td>
             <td class="td-remove" style="display: ${modoAdmAtivo ? 'table-cell' : 'none'}"><button class="btn btn-remove" onclick="this.closest('tr').remove()">✖</button></td>
         `;
-        
         const corpo = document.getElementById('corpo-tabela');
-        if (nova) { corpo.insertBefore(tr, corpo.firstChild); } 
-        else { corpo.appendChild(tr); }
-
-        if (modoAdmAtivo) {
-            tr.querySelectorAll('input, select').forEach(el => { el.disabled = false; el.classList.add('editavel'); });
-        }
+        if (nova) corpo.insertBefore(tr, corpo.firstChild); else corpo.appendChild(tr);
+        if (modoAdmAtivo) tr.querySelectorAll('input, select').forEach(el => { el.disabled = false; el.classList.add('editavel'); });
         tr.querySelectorAll('select').forEach(atualizarCores);
     }
 
+    function salvarTudo() {
+        const dados = Array.from(document.querySelectorAll('#corpo-tabela tr')).map(tr => {
+            const i = tr.querySelectorAll('input, select');
+            return { numero: i[0].value, via1: i[1].value, via2: i[2].value, local: i[3].value };
+        });
+        localStorage.setItem('dadosChavesADM', JSON.stringify(dados));
+        const extras = { via1: document.getElementById('extra-1via').value, via2: document.getElementById('extra-2via').value };
+        localStorage.setItem('dadosExtrasADM', JSON.stringify(extras));
+        alert("✅ Painel Principal Salvo!");
+        location.reload();
+    }
+
+    // --- LÓGICA TELA SAÍDA (NOVA) ---
+    function liberarEdicaoSaida() {
+        modoEdicaoSaida = true;
+        document.getElementById('btnEditSaida').style.display = "none";
+        document.getElementById('btnSalvarSaida').style.display = "block";
+        document.querySelectorAll('.thAcoesSaida').forEach(el => el.style.display = "table-cell");
+        document.querySelectorAll('#corpo-saidas input, #corpo-saidas select').forEach(el => {
+            el.disabled = false; el.classList.add('editavel');
+        });
+        document.querySelectorAll('.td-remove-saida').forEach(td => td.style.display = "table-cell");
+    }
+
+    function adicionarLinhaSaida(item = {}, nova = false, editavel = false) {
+        const agora = new Date().toLocaleString('pt-BR').substring(0, 16);
+        const i = { data: item.data || agora, chave: item.chave || '', solicitante: item.solicitante || '', setor: item.setor || '', ramal: item.ramal || '', motivo: item.motivo || 'esquecido', visto: item.visto || '' };
+        const tr = document.createElement('tr');
+        const statusHTML = (editavel || modoEdicaoSaida) ? 'class="editavel"' : 'disabled';
+        
+        tr.innerHTML = `
+            <td style="font-size:0.75rem; font-weight:bold">${i.data}</td>
+            <td><input type="number" value="${i.chave}" ${statusHTML}></td>
+            <td><input type="text" value="${i.solicitante}" ${statusHTML}></td>
+            <td><input type="text" value="${i.setor}" ${statusHTML}></td>
+            <td><input type="text" value="${i.ramal}" ${statusHTML}></td>
+            <td><select ${statusHTML}><option value="quebrado" ${i.motivo==='quebrado'?'selected':''}>Quebrado</option><option value="perdido" ${i.motivo==='perdido'?'selected':''}>Perdido</option><option value="esquecido" ${i.motivo==='esquecido'?'selected':''}>Esquecido</option></select></td>
+            <td><input type="text" value="${i.visto}" ${statusHTML}></td>
+            <td class="td-remove-saida" style="display: ${editavel || modoEdicaoSaida ? 'table-cell' : 'none'}"><button class="btn btn-remove" onclick="validarSenha(() => this.closest('tr').remove())">✖</button></td>
+        `;
+        const corpo = document.getElementById('corpo-saidas');
+        if (nova) { 
+            corpo.insertBefore(tr, corpo.firstChild); 
+            document.getElementById('btnSalvarSaida').style.display = "block";
+        } else corpo.appendChild(tr);
+    }
+
+    function salvarSaidas() {
+        const dados = Array.from(document.querySelectorAll('#corpo-saidas tr')).map(tr => {
+            const inputs = tr.querySelectorAll('input, select');
+            return { data: tr.cells[0].innerText, chave: inputs[0].value, solicitante: inputs[1].value, setor: inputs[2].value, ramal: inputs[3].value, motivo: inputs[4].value, visto: inputs[5].value };
+        });
+        localStorage.setItem('dadosSaidasADM', JSON.stringify(dados));
+        alert("✅ Controle de Saída Salvo!");
+        location.reload();
+    }
+
+    // --- FUNÇÕES COMPARTILHADAS ---
     function atualizarCores(select) {
-        if (select.classList.contains('select-local')) return; 
+        if (select.classList.contains('select-local')) return;
         select.className = select.value === 'sim' ? 'status-sim' : 'status-nao';
         if(modoAdmAtivo) select.classList.add('editavel');
         atualizarApurado();
     }
 
+    function atualizarApurado() {
+        let s1 = 0, s2 = 0;
+        document.querySelectorAll('#corpo-tabela tr').forEach(tr => {
+            const s = tr.querySelectorAll('select');
+            if(s[0]?.value === 'nao') s1++;
+            if(s[1]?.value === 'nao') s2++;
+        });
+        document.getElementById('count-sem-1via').innerText = s1;
+        document.getElementById('count-sem-2via').innerText = s2;
+    }
+
     function aplicarFiltroExclusivo(tipo, valor = null) {
         const busca = document.getElementById('inputBusca').value.trim();
         const local = document.getElementById('filtroLocal').value;
-        const btnFechar = document.getElementById('btnFecharBusca');
-        btnFechar.style.display = 'block';
-        
+        document.getElementById('btnFecharBusca').style.display = 'block';
         document.querySelectorAll('#corpo-tabela tr').forEach(tr => {
             const inputs = tr.querySelectorAll('input, select');
-            const nChave = inputs[0].value;
-            const s1 = inputs[1].value;
-            const s2 = inputs[2].value;
-            const loc = inputs[3].value;
-            let mostrar = false;
-            if (tipo === 'texto') mostrar = (nChave === busca);
-            else if (tipo === 'local') mostrar = (local === 'todos' || loc === local);
-            else if (tipo === 'status') mostrar = (valor === 1 ? s1 === 'nao' : s2 === 'nao');
-            tr.style.display = mostrar ? "" : "none";
+            let m = false;
+            if (tipo === 'texto') m = (inputs[0].value === busca);
+            else if (tipo === 'local') m = (local === 'todos' || inputs[3].value === local);
+            else if (tipo === 'status') m = (valor === 1 ? inputs[1].value === 'nao' : inputs[2].value === 'nao');
+            tr.style.display = m ? "" : "none";
         });
         if (tipo === 'texto' && busca === "") resetarTudo();
     }
@@ -373,27 +294,17 @@
         document.querySelectorAll('#corpo-tabela tr').forEach(tr => tr.style.display = "");
     }
 
-    function atualizarApurado() {
-        let sem1 = 0, sem2 = 0;
-        document.querySelectorAll('#corpo-tabela tr').forEach(tr => {
-            const s = tr.querySelectorAll('select');
-            if(s[0]?.value === 'nao') sem1++;
-            if(s[1]?.value === 'nao') sem2++;
-        });
-        document.getElementById('count-sem-1via').innerText = sem1;
-        document.getElementById('count-sem-2via').innerText = sem2;
-    }
-
     document.addEventListener('DOMContentLoaded', () => {
-        // Carrega as chaves sem identificação
+        // Carrega Extras
         const extras = JSON.parse(localStorage.getItem('dadosExtrasADM') || '{"via1":0, "via2":0}');
         document.getElementById('extra-1via').value = extras.via1;
         document.getElementById('extra-2via').value = extras.via2;
-
-        // Carrega as chaves da tabela
-        const dados = JSON.parse(localStorage.getItem('dadosChavesADM') || '[]');
-        dados.sort((a, b) => a.numero - b.numero);
-        dados.forEach(item => adicionarLinha(item));
+        // Carrega Chaves
+        const d1 = JSON.parse(localStorage.getItem('dadosChavesADM') || '[]');
+        d1.sort((a,b) => a.numero - b.numero).forEach(item => adicionarLinha(item));
+        // Carrega Saídas
+        const d2 = JSON.parse(localStorage.getItem('dadosSaidasADM') || '[]');
+        d2.forEach(item => adicionarLinhaSaida(item));
         atualizarApurado();
     });
 </script>
